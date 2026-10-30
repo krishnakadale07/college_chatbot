@@ -1,0 +1,146 @@
+{
+  "college_info": {
+    "name": "Zeal College of Engineering and Research",
+    "short_name": "ZCOER",
+    "academic_year": "2026-2027",
+    "current_semester": "Fall / Odd Semester 2026"
+  },
+  "intents": [
+    {
+      "tag": "greeting",
+      "keywords": ["hi", "hello", "hey", "hola", "sup", "greetings", "good morning", "good afternoon", "good evening", "start"],
+      "responses": [
+        "👋 Hello there! I'm **CampusBuddy**, your college assistant. How can I help you today? You can ask about exams, library hours, attendance rules, GPA calculation, or hostel info!",
+        "Hey! Welcome to **CampusBuddy**. What college info are you looking for today? Feel free to click any of the quick suggestions below or type your question!",
+        "Hi student! Ready to help you navigate college life at Zeal College of Engineering & Research. Ask me anything from semester schedules to cafeteria menus!"
+      ]
+    },
+    {
+      "tag": "about_zeal",
+      "keywords": ["zeal", "about zeal", "zcoer", "zeal college", "zeal campus", "location", "address", "narhe", "pune", "sppu"],
+      "responses": [
+        "🏛️ **Zeal College of Engineering and Research (ZCOER)**:\n\n- **Campus**: Narhe, Pune, Maharashtra 411041\n- **Affiliation**: Savitribai Phule Pune University (SPPU) & Approved by AICTE, Accredited with NAAC 'A' Grade.\n- **Departments**: Computer Engineering, AI & Data Science, IT, Mechanical, Civil, Electrical, and E&TC.\n- **Campus Highlights**: State-of-the-art innovation labs, central library, sports complex, amphitheater, and incubation center."
+      ]
+    },
+    {
+      "tag": "attendance_rules",
+      "keywords": ["attendance", "minimum attendance", "attendance percentage", "shortage", "detain", "detention", "75%"],
+      "responses": [
+        "📋 **College Attendance Policy**:\n\n- **Minimum Required**: **75%** in each individual subject to be eligible for end-semester exams.\n- **Medical Condonation**: Relaxation up to **65%** is allowed with valid medical certificates submitted within 3 days to the Dean's Office.\n- **Below 65%**: Strict detention; you will need to re-register for the course in the supplementary term.\n\n💡 *Tip: Use our built-in Attendance Calculator in the sidebar to check how many classes you can afford to miss or need to attend!*"
+      ]
+    },
+    {
+      "tag": "exam_schedule",
+      "keywords": ["exam", "exams", "examination", "midterm", "finals", "end sem", "schedule", "timetable", "datesheet", "routine"],
+      "responses": [
+        "📅 **Upcoming Exam Schedule (Fall 2026)**:\n\n- **Mid-Term Exams**: November 10 – November 18, 2026\n- **Practical / Lab Viva**: December 01 – December 07, 2026\n- **Final End-Semester Exams**: December 12 – December 28, 2026\n- **Admit Card Release**: Download from the Student ERP portal 7 days before exams.\n\n⚠️ *Ensure all tuition dues and library books are cleared before downloading your hall ticket!*"
+      ]
+    },
+    {
+      "tag": "library",
+      "keywords": ["library", "books", "borrow", "reading room", "library timings", "return book", "fine", "issue book"],
+      "responses": [
+        "📚 **Central Library Information**:\n\n- **Timings**: Monday to Friday: 8:00 AM – 10:00 PM | Saturday & Sunday: 9:00 AM – 6:00 PM\n- **Exam Period Timings**: Open 24/7 during final exam weeks.\n- **Book Borrowing Limit**: \n  - Undergrads: 4 books for 14 days\n  - Postgrads: 6 books for 28 days\n- **Late Return Fine**: $0.50 (or ₹10) per book per day.\n- **Digital Library**: Access IEEE, Springer, and JSTOR via the campus Wi-Fi library proxy."
+      ]
+    },
+    {
+      "tag": "gpa_calculator",
+      "keywords": ["gpa", "cgpa", "sgpa", "grading", "calculate gpa", "marks", "grades", "percentage"],
+      "responses": [
+        "🎓 **Grading System & GPA Calculation**:\n\nOur college follows a 10-point scale:\n- **O / A+ (Outstanding)**: 10 points (90-100%)\n- **A (Excellent)**: 9 points (80-89%)\n- **B+ (Very Good)**: 8 points (70-79%)\n- **B (Good)**: 7 points (60-69%)\n- **C (Average)**: 6 points (50-59%)\n- **P (Pass)**: 5 points (40-49%)\n- **F (Fail)**: 0 points (< 40%)\n\n🧮 **Formula**: `SGPA = Σ(Course Credits × Grade Points) / Total Credits`\n\n👉 *Click the **'GPA Calculator'** button in the top menu to open the interactive calculator tool!*"
+      ]
+    },
+    {
+      "tag": "canteen_mess",
+      "keywords": ["canteen", "cafeteria", "mess", "food", "lunch", "breakfast", "dinner", "menu", "snacks"],
+      "responses": [
+        "🍽️ **Cafeteria & Food Courts**:\n\n- **Main Canteen**: 7:30 AM – 9:00 PM (Serving breakfast, thali meals, burgers, sandwiches & beverages)\n- **Hostel Mess Hours**:\n  - Breakfast: 7:30 AM – 9:30 AM\n  - Lunch: 12:30 PM – 2:30 PM\n  - Evening Tea & Snacks: 5:00 PM – 6:15 PM\n  - Dinner: 7:45 PM – 9:45 PM\n- **Night Canteen (Hostel Block C)**: Open till 1:30 AM for late-night study cravings!"
+      ]
+    },
+    {
+      "tag": "hostel_rules",
+      "keywords": ["hostel", "dorm", "curfew", "gate timing", "night out", "room", "warden", "visitor"],
+      "responses": [
+        "🏢 **Hostel Guidelines & Timings**:\n\n- **Gate Curfew**: Entry closes at **9:30 PM** sharp for all hostel blocks.\n- **Late Entry / Night Out**: Requires an e-pass submitted on the Hostel ERP portal at least 4 hours in advance and verified by parents' SMS confirmation.\n- **Visitor Hours**: 4:00 PM – 7:00 PM in the hostel common reception area only.\n- **Chief Warden Office**: Ground Floor, Block A (Contact: Ext 4022)."
+      ]
+    },
+    {
+      "tag": "wifi_it_support",
+      "keywords": ["wifi", "wi-fi", "internet", "lan", "password", "it support", "portal", "erp", "login", "lms"],
+      "responses": [
+        "📶 **Campus Wi-Fi & IT Support**:\n\n- **Network Name (SSID)**: `CAMPUS-STUDENT-SECURE`\n- **How to Connect**:\n  1. Select the SSID on your device.\n  2. Enter your Student ID as Username.\n  3. Enter your default password (`RollNumber@BirthYear`) or your ERP password.\n- **Need Reset?**: Visit the IT Helpdesk in Computer Center Lab 3 or email `helpdesk@college.edu`."
+      ]
+    },
+    {
+      "tag": "id_card",
+      "keywords": ["id card", "lost id", "identity card", "replace id", "duplicate id"],
+      "responses": [
+        "🪪 **Lost or Damaged ID Card Procedure**:\n\n1. File a lost item notice at the Security Office (Main Gate).\n2. Pay the duplicate ID card fee ($10 / ₹200) at the Accounts Desk or student portal.\n3. Submit the payment receipt at the Registrar's Office Counter 2.\n4. Your new smart ID card will be ready for pickup within 2 business days."
+      ]
+    },
+    {
+      "tag": "scholarships",
+      "keywords": ["scholarship", "financial aid", "fee concession", "merit", "grant", "stipend"],
+      "responses": [
+        "💰 **Scholarships & Financial Aid**:\n\n- **Merit Scholarship**: Top 5% students with CGPA > 9.0 get a 30% tuition fee waiver.\n- **Need-Based Aid**: Available for families with annual income < threshold (Applications open every August).\n- **Sports & Cultural Quota**: Up to 50% waiver for national/state level champions.\n- **Submission Portal**: Check the 'Scholarships' tab on the college portal or visit the Dean of Student Affairs."
+      ]
+    },
+    {
+      "tag": "emergency_contacts",
+      "keywords": ["emergency", "security", "ambulance", "doctor", "health center", "medical", "ragging", "helpline", "police"],
+      "responses": [
+        "🚨 **Campus Emergency Contacts**:\n\n- **Campus Security (24/7)**: +1-555-0199 / Intercom: 100\n- **Health Center / Ambulance**: +1-555-0144 / Intercom: 108 (Doctors available 24/7)\n- **Student Counselor / Mental Health**: +1-555-0188 (Counseling Center, Block B)\n- **Anti-Ragging Helpline**: 1800-180-5522 (Toll Free, strictly confidential)\n- **Women's Safety Cell**: +1-555-0166"
+      ]
+    },
+    {
+      "tag": "study_tips",
+      "keywords": ["study tip", "study advice", "how to study", "focus", "pomodoro", "exams preparation", "viva", "grades improve"],
+      "responses": [
+        "🧠 **College Study Strategies for Top Grades**:\n\n1. **The Pomodoro Technique**: Study undistracted for 25 mins, take a 5 min break. After 4 sessions, take a 20 min break.\n2. **Active Recall & Spaced Repetition**: Quiz yourself rather than passively re-reading notes.\n3. **Solve Past 5 Years Papers**: 60-70% of exam question patterns recur. Practice them under timed conditions.\n4. **Feynman Technique**: Try explaining a difficult topic in simple terms to a classmate. If you get stuck, re-check the gaps."
+      ]
+    },
+    {
+      "tag": "clubs_activities",
+      "keywords": ["club", "clubs", "hackathon", "robotics", "cultural", "sports", "extracurricular", "societies"],
+      "responses": [
+        "🎭 **Student Clubs & Extracurriculars**:\n\n- **Technical Clubs**: Coding Club (ACM/IEEE), Robotics Society, AI & Data Science Club.\n- **Cultural Societies**: Music Band, Dance Crew, Dramatics, Fine Arts & Photography.\n- **Sports & Fitness**: Basketball, Cricket, Football, Badminton courts, and Gym.\n- **Club Recruitment**: Annual Club Fair happens in the second week of the semester at the Amphitheatre!"
+      ]
+    },
+    {
+      "tag": "placements_internships",
+      "keywords": ["placement", "job", "internship", "career", "tpo", "training", "resume", "interview"],
+      "responses": [
+        "💼 **Career & Placement Cell (TPO)**:\n\n- **Location**: Administrative Block, 2nd Floor (Office 208)\n- **Eligibility**: Min CGPA 6.5 with no active backlogs for tier-1 campus placements.\n- **Resume Reviews**: Walk-in resume clinics every Wednesday from 3:00 PM – 5:00 PM.\n- **Internship Portals**: Register on the College Placement Portal (`tpo.college.edu`) using your official roll number."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "keywords": ["thanks", "thank you", "thx", "appreciate", "helpful", "awesome", "great"],
+      "responses": [
+        "😊 You're very welcome! Feel free to ask if anything else comes up. Best of luck with your studies!",
+        "Glad I could help! Good luck with your semester, and don't hesitate to reach out anytime! 🚀",
+        "Happy to assist! Have a productive day on campus! ✨"
+      ]
+    },
+    {
+      "tag": "bye",
+      "keywords": ["bye", "goodbye", "cya", "see you", "exit", "later"],
+      "responses": [
+        "👋 Goodbye! Have a fantastic day ahead and study hard!",
+        "Take care! Remember to stay hydrated and take study breaks. See you later! 🎓"
+      ]
+    }
+  ],
+  "faq_quick_list": [
+    {"label": "📅 Exam Dates", "query": "When are the semester exams?"},
+    {"label": "📊 Attendance Policy", "query": "What is the minimum attendance requirement?"},
+    {"label": "📚 Library Timings", "query": "What are the central library hours?"},
+    {"label": "🎓 GPA System", "query": "How is GPA and CGPA calculated?"},
+    {"label": "🏢 Hostel Rules", "query": "What are the hostel gate curfew timings?"},
+    {"label": "📶 Campus Wi-Fi", "query": "How do I connect to campus Wi-Fi?"},
+    {"label": "🍽️ Canteen Menu", "query": "What are the cafeteria and mess timings?"},
+    {"label": "🚨 Emergency Numbers", "query": "Show me campus emergency contacts"},
+    {"label": "💼 Placements & TPO", "query": "How does campus placement work?"},
+    {"label": "💡 Study Tips", "query": "Give me some study tips for exams"}
+  ]
+}

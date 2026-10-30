@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusBuddy | College Student ChatBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="theme-light">
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="college-badge">
+          <div class="badge-icon">🎓</div>
+          <div class="college-meta">
+            <h3>{{ college.short_name or "ZCOER" }}</h3>
+            <span>{{ college.name or "Zeal College of Engineering and Research" }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-tools-section">
+        <div class="section-title">ACADEMIC TOOLS</div>
+        <button class="tool-btn" id="open-gpa-modal">
+          <i class="fa-solid fa-calculator"></i>
+          <span>GPA / CGPA Calculator</span>
+          <span class="tool-pill">Tool</span>
+        </button>
+        <button class="tool-btn" id="open-attendance-modal">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Attendance Predictor</span>
+          <span class="tool-pill">75%</span>
+        </button>
+      </div>
+
+      <div class="semester-info-card">
+        <div class="info-card-header">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span>Academic Status</span>
+        </div>
+        <p class="term-name">{{ college.current_semester or "Fall Semester 2026" }}</p>
+        <div class="info-metric">
+          <span>Next Exams:</span>
+          <strong>Nov 10, 2026</strong>
+        </div>
+        <div class="info-metric">
+          <span>Min Attendance:</span>
+          <strong class="highlight-badge">75% Mandatory</strong>
+        </div>
+      </div>
+
+      <div class="quick-faq-list">
+        <div class="section-title">POPULAR TOPICS</div>
+        <div class="topic-chips" id="sidebar-topics">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="emergency-badge" id="emergency-btn">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div>
+            <strong>Campus Helplines</strong>
+            <small>Security & Health (24/7)</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT CONTAINER -->
+    <main class="chat-wrapper">
+      
+      <!-- TOP NAV BAR -->
+      <header class="top-nav">
+        <div class="nav-left">
+          <button class="icon-btn mobile-menu-btn" id="toggle-sidebar" title="Toggle Sidebar">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="bot-header-info">
+            <div class="avatar-ring">
+              <span class="avatar-emoji">🤖</span>
+              <span class="status-dot" title="Online"></span>
+            </div>
+            <div>
+              <div class="bot-title-row">
+                <h2>CampusBuddy</h2>
+                <span class="badge-role">Student Assistant</span>
+              </div>
+              <p class="bot-subtitle">Ask anything about exams, timetable, attendance, hostel & grades</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <button class="icon-btn" id="btn-theme-toggle" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+          <button class="icon-btn" id="btn-clear-chat" title="Clear Chat History">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <button class="icon-btn" id="btn-export-chat" title="Download Transcript">
+            <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- CHAT MESSAGE SCROLL REGION -->
+      <section class="messages-container" id="chat-messages">
+        <!-- Initial Bot Greeting Bubble -->
+        <div class="message-row bot-row animate-fade-in">
+          <div class="bot-avatar">🤖</div>
+          <div class="message-bubble bot-bubble">
+            <div class="bubble-header">
+              <span class="sender-name">CampusBuddy</span>
+              <span class="timestamp" id="initial-time">Just now</span>
+            </div>
+            <div class="bubble-content">
+              <p>Hey there! 👋 Welcome to your <strong>College Companion</strong>.</p>
+              <p>I can help you navigate campus life instantly. Try asking me any question, or select one of the quick suggestions below:</p>
+            </div>
+            <div class="welcome-suggestions" id="welcome-chips">
+              <!-- Dynamically populated from JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TYPING INDICATOR -->
+      <div class="typing-indicator-container" id="typing-indicator" style="display: none;">
+        <div class="bot-avatar mini">🤖</div>
+        <div class="typing-bubble">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <!-- CHAT INPUT DOCK -->
+      <footer class="chat-input-area">
+        <div class="input-form-container">
+          <button class="icon-btn voice-btn" id="btn-voice-input" title="Voice Typing (Microphone)">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <input 
+            type="text" 
+            id="chat-input" 
+            placeholder="Type your question (e.g. 'When are exams?', 'Attendance 18 24', 'Library hours')..." 
+            autocomplete="off"
+          />
+          <button class="send-btn" id="btn-send-message" title="Send Question">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="input-hints">
+          <span>💡 Press <kbd>Enter</kbd> to send</span>
+          <span>•</span>
+          <span>Tip: Type "attendance 19 25" for instant calculations</span>
+        </div>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- GPA CALCULATOR MODAL -->
+  <div class="modal-overlay" id="gpa-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-calculator"></i>
+          <h3>SGPA / CGPA Calculator</h3>
+        </div>
+        <button class="close-modal-btn" data-close="gpa-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Add your semester subjects, credits, and expected grade to calculate your GPA.</p>
+        <div class="course-table-container">
+          <table class="course-table" id="course-table">
+            <thead>
+              <tr>
+                <th>Subject Name</th>
+                <th width="100">Credits</th>
+                <th width="120">Grade</th>
+                <th width="50"></th>
+              </tr>
+            </thead>
+            <tbody id="course-rows">
+              <!-- Default initial rows -->
+              <tr>
+                <td><input type="text" class="course-name" value="Data Structures & Algorithms" placeholder="Course title"></td>
+                <td><input type="number" class="course-credits" value="4" min="1" max="10"></td>
+                <td>
+                  <select class="course-grade">
+                    <option value="O">O (10 pts)</option>
+                    <option value="A+" selected>A+ (10 pts)</option>
+                    <option value="A">A (9 pts)</option>
+                    <option value="B+">B+ (8 pts)</option>
+                    <option value="B">B (7 pts)</option>
+                    <option value="C">C (6 pts)</option>
+                    <option value="P">P (5 pts)</option>
+                    <option value="F">F (0 pts)</option>
+                  </select>
+                </td>
+                <td><button class="btn-remove-row" title="Remove">&times;</button></td>
+              </tr>
+              <tr>
+                <td><input type="text" class="course-name" value="Database Systems" placeholder="Course title"></td>
+                <td><input type="number" class="course-credits" value="3" min="1" max="10"></td>
+                <td>
+                  <select class="course-grade">
+                    <option value="O">O (10 pts)</option>
+                    <option value="A+">A+ (10 pts)</option>
+                    <option value="A" selected>A (9 pts)</option>
+                    <option value="B+">B+ (8 pts)</option>
+                    <option value="B">B (7 pts)</option>
+                    <option value="C">C (6 pts)</option>
+                    <option value="P">P (5 pts)</option>
+                    <option value="F">F (0 pts)</option>
+                  </select>
+                </td>
+                <td><button class="btn-remove-row" title="Remove">&times;</button></td>
+              </tr>
+              <tr>
+                <td><input type="text" class="course-name" value="Operating Systems Lab" placeholder="Course title"></td>
+                <td><input type="number" class="course-credits" value="2" min="1" max="10"></td>
+                <td>
+                  <select class="course-grade">
+                    <option value="O" selected>O (10 pts)</option>
+                    <option value="A+">A+ (10 pts)</option>
+                    <option value="A">A (9 pts)</option>
+                    <option value="B+">B+ (8 pts)</option>
+                    <option value="B">B (7 pts)</option>
+                    <option value="C">C (6 pts)</option>
+                    <option value="P">P (5 pts)</option>
+                    <option value="F">F (0 pts)</option>
+                  </select>
+                </td>
+                <td><button class="btn-remove-row" title="Remove">&times;</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-actions-row">
+          <button class="btn-secondary" id="btn-add-course">
+            <i class="fa-solid fa-plus"></i> Add Course
+          </button>
+          <button class="btn-primary" id="btn-compute-gpa">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Calculate SGPA
+          </button>
+        </div>
+
+        <div class="result-box" id="gpa-result-box" style="display: none;">
+          <div class="result-highlight">
+            <div class="gpa-score" id="res-gpa-val">0.00</div>
+            <div class="gpa-label">Estimated SGPA</div>
+          </div>
+          <div class="result-subtext" id="res-gpa-sub"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATTENDANCE PREDICTOR MODAL -->
+  <div class="modal-overlay" id="attendance-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-chart-pie"></i>
+          <h3>Attendance Bunk & Safe Predictor</h3>
+        </div>
+        <button class="close-modal-btn" data-close="attendance-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Find out how many classes you can afford to miss or need to attend to satisfy the 75% rule.</p>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Classes Attended So Far</label>
+            <input type="number" id="att-attended" value="18" min="0" placeholder="e.g. 18">
+          </div>
+          <div class="form-group">
+            <label>Total Classes Held</label>
+            <input type="number" id="att-total" value="24" min="1" placeholder="e.g. 24">
+          </div>
+          <div class="form-group">
+            <label>Required Threshold (%)</label>
+            <input type="number" id="att-target" value="75" min="50" max="100">
+          </div>
+        </div>
+
+        <button class="btn-primary full-width" id="btn-compute-attendance">
+          <i class="fa-solid fa-calculator"></i> Check Attendance Status
+        </button>
+
+        <div class="result-box" id="att-result-box" style="display: none;">
+          <div class="att-status-badge" id="att-badge">SAFE</div>
+          <div class="att-pct" id="att-pct-val">75.0%</div>
+          <div class="result-subtext" id="att-advice"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY NUMBERS MODAL -->
+  <div class="modal-overlay" id="emergency-modal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header emergency-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h3>Campus Emergency Directory</h3>
+        </div>
+        <button class="close-modal-btn" data-close="emergency-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="emergency-list">
+          <div class="em-item">
+            <div class="em-icon"><i class="fa-solid fa-shield"></i></div>
+            <div class="em-details">
+              <strong>Campus Security Patrol (24/7)</strong>
+              <span>Main Gate / Patrol Intercom #100</span>
+            </div>
+            <a href="tel:+15550199" class="call-btn"><i class="fa-solid fa-phone"></i> +1-555-0199</a>
+          </div>
+          <div class="em-item">
+            <div class="em-icon red"><i class="fa-solid fa-truck-medical"></i></div>
+            <div class="em-details">
+              <strong>Health Center & Ambulance</strong>
+              <span>Medical Block Ground Floor</span>
+            </div>
+            <a href="tel:+15550144" class="call-btn"><i class="fa-solid fa-phone"></i> +1-555-0144</a>
+          </div>
+          <div class="em-item">
+            <div class="em-icon purple"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="em-details">
+              <strong>Student Counseling & Wellness</strong>
+              <span>Confidential mental health support</span>
+            </div>
+            <a href="tel:+15550188" class="call-btn"><i class="fa-solid fa-phone"></i> +1-555-0188</a>
+          </div>
+          <div class="em-item">
+            <div class="em-icon amber"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div class="em-details">
+              <strong>National Anti-Ragging Helpline</strong>
+              <span>Toll-free 24-hour anonymous reporting</span>
+            </div>
+            <a href="tel:18001805522" class="call-btn"><i class="fa-solid fa-phone"></i> 1800-180-5522</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
